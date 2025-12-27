@@ -1,0 +1,41 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0ea5e9;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d946ef;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="240" fill="url(#gradient)" opacity="0.1"/>
+  
+  <!-- Compass outer ring -->
+  <circle cx="256" cy="256" r="180" stroke="url(#gradient)" stroke-width="8" fill="none"/>
+  
+  <!-- Compass cardinal points -->
+  <path d="M256 76 L256 116" stroke="url(#gradient)" stroke-width="6" stroke-linecap="round"/>
+  <path d="M256 396 L256 436" stroke="url(#gradient)" stroke-width="6" stroke-linecap="round"/>
+  <path d="M76 256 L116 256" stroke="url(#gradient)" stroke-width="6" stroke-linecap="round"/>
+  <path d="M396 256 L436 256" stroke="url(#gradient)" stroke-width="6" stroke-linecap="round"/>
+  
+  <!-- Compass needle -->
+  <g transform="rotate(-45 256 256)">
+    <path d="M256 156 L286 256 L256 356 L226 256 Z" fill="#0ea5e9"/>
+    <path d="M256 156 L286 256 L256 226 Z" fill="#0ea5e9" opacity="0.6"/>
+    <path d="M256 356 L226 256 L256 286 Z" fill="#d946ef" opacity="0.8"/>
+  </g>
+  
+  <!-- Center pin marker -->
+  <circle cx="256" cy="256" r="24" fill="url(#gradient)"/>
+  <circle cx="256" cy="256" r="12" fill="#1a1a2e"/>
+  
+  <!-- Location pin overlays (subtle) -->
+  <path d="M256 196 C 228 196 206 218 206 246 C 206 274 256 316 256 316 C 256 316 306 274 306 246 C 306 218 284 196 256 196 Z" 
+        fill="none" stroke="url(#gradient)" stroke-width="4" opacity="0.4"/>
+  
+  <!-- Tech circuit elements -->
+  <circle cx="356" cy="156" r="4" fill="#0ea5e9" opacity="0.6"/>
+  <circle cx="156" cy="356" r="4" fill="#d946ef" opacity="0.6"/>
+  <path d="M356 156 L376 136" stroke="#0ea5e9" stroke-width="2" opacity="0.4"/>
+  <path d="M156 356 L136 376" stroke="#d946ef" stroke-width="2" opacity="0.4"/>
+</svg>
