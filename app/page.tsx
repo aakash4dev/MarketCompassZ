@@ -182,7 +182,7 @@ export default function HomePage() {
                                     title: 'AI Agent Scans',
                                     desc: 'Our ADK-powered agent autonomously searches Google Maps and cross-references multiple data sources.',
                                     num: '02',
-                                    align: 'right'
+                                    align: 'left'
                                 },
                                 {
                                     icon: <CheckCircle2 className="w-8 h-8" />,
@@ -196,19 +196,14 @@ export default function HomePage() {
                                     title: 'Start Pitching',
                                     desc: 'Contact high-quality leads directly with all the info you need to close the deal.',
                                     num: '04',
-                                    align: 'right'
+                                    align: 'left'
                                 }
                             ].map((step, i) => (
-                                <div key={i} className={`flex items-center gap-8 ${step.align === 'right' ? 'md:flex-row-reverse' : ''}`}>
+                                <div key={i} className={`flex items-center gap-8`}>
                                     {/* Content */}
-                                    <div className={`flex-1 ${step.align === 'right' ? 'md:text-right' : ''}`}>
+                                    <div className={`flex-1`}>
                                         <h3 className="text-2xl font-bold text-white mb-3 flex items-center gap-3">
-                                            {step.align === 'left' && step.title}
-                                            {step.align === 'right' && (
-                                                <>
-                                                    {step.title}
-                                                </>
-                                            )}
+                                            {step.title}
                                         </h3>
                                         <p className="text-gray-400 leading-relaxed">{step.desc}</p>
                                     </div>
