@@ -1,50 +1,27 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
-import { Search, MapPin, Briefcase, Sparkles, Globe, Zap, Users, BarChart3, Shield, Rocket, CheckCircle2, Play } from 'lucide-react';
-
-interface Lead {
-    name: string;
-    address: string;
-    phone: string;
-    category: string;
-}
+import { TrendingUp, Zap, Users, ArrowRight, Play, Sparkles, Globe, BarChart3, Shield, Rocket, CheckCircle2, Search, Briefcase, MapPin } from 'lucide-react';
+import AILeadChat from '@/components/AILeadChat';
 
 export default function HomePage() {
-    const [niche, setNiche] = useState('');
-    const [city, setCity] = useState('');
-    const [loading, setLoading] = useState(false);
-    const [leads, setLeads] = useState<Lead[]>([]);
-
-    const quickNiches = ['Plumbers', 'Restaurants', 'Hair Salons', 'Auto Repair', 'Dentists'];
-    const quickCities = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Miami'];
-
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setLoading(true);
-
-        setTimeout(() => {
-            setLeads([
-                { name: 'Sharma Trading Co.', address: 'Karol Bagh, Delhi', phone: '+91-9876543210', category: niche },
-                { name: 'Local Boutique Store', address: 'Connaught Place, Delhi', phone: '+91-9876543211', category: niche },
-                { name: 'Family Restaurant', address: 'Punjabi Bagh, Delhi', phone: '+91-9876543212', category: niche },
-                { name: 'Electronics Shop', address: 'Lajpat Nagar, Delhi', phone: '+91-9876543213', category: niche },
-                { name: 'Fitness Center', address: 'Dwarka, Delhi', phone: '+91-9876543214', category: niche },
-            ]);
-            setLoading(false);
-        }, 2000);
-    };
-
     return (
         <div className="min-h-screen">
             {/* Hero Section */}
             <section className="relative px-4 py-20 md:py-32 overflow-hidden">
+                {/* Background Elements */}
+                <div className="absolute inset-0 -z-10">
+                    <div className="absolute top-20 right-10 w-72 h-72 bg-indigo-600/20 rounded-full mix-blend-screen filter blur-3xl opacity-50 animate-float" />
+                    <div className="absolute bottom-20 left-10 w-72 h-72 bg-pink-600/20 rounded-full mix-blend-screen filter blur-3xl opacity-50 animate-float" style={{ animationDelay: '2s' }} />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-600/20 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-float" style={{ animationDelay: '4s' }} />
+                </div>
+
                 <div className="max-w-6xl mx-auto text-center">
                     {/* Badge */}
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/30 mb-8">
-                        <Sparkles className="w-4 h-4 text-cyan-400" />
-                        <span className="text-sm font-semibold text-cyan-300">Powered by Google ADK & AI</span>
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/30 backdrop-blur-sm mb-8">
+                        <Zap className="w-4 h-4 text-cyan-400" />
+                        <span className="text-sm font-semibold text-cyan-300">Powered by Google ADK & Gemini AI</span>
                     </div>
 
                     {/* Main Headline */}
@@ -103,91 +80,17 @@ export default function HomePage() {
                 </div>
             </section>
 
-            {/* Lead Hunt Form Section */}
+            {/* AI Chat Interface Section */}
             <section className="relative px-4 py-20">
                 <div className="max-w-4xl mx-auto">
                     <div className="text-center mb-12">
                         <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
                             Start Your <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Lead Hunt</span>
                         </h2>
-                        <p className="text-gray-400 text-lg">Enter a business niche and city — our AI does the rest.</p>
+                        <p className="text-gray-400 text-lg">Chat with AI to find exactly what you need — ratings, location, niche, and more!</p>
                     </div>
 
-                    <form onSubmit={handleSubmit} className="glass rounded-2xl p-8 border border-white/10">
-                        <div className="grid md:grid-cols-2 gap-6 mb-6">
-                            <div>
-                                <label className="block text-sm font-semibold text-gray-400 mb-3 flex items-center gap-2">
-                                    <Briefcase className="w-4 h-4" />
-                                    Business Niche
-                                </label>
-                                <input
-                                    type="text"
-                                    value={niche}
-                                    onChange={(e) => setNiche(e.target.value)}
-                                    placeholder="e.g., Plumbers, Restaurants..."
-                                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-600 focus:border-cyan-500 focus:outline-none transition-colors"
-                                    required
-                                />
-                                <div className="flex flex-wrap gap-2 mt-3">
-                                    {quickNiches.map((quick) => (
-                                        <button
-                                            key={quick}
-                                            type="button"
-                                            onClick={() => setNiche(quick)}
-                                            className="px-3 py-1 rounded-lg bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 text-xs font-semibold hover:bg-indigo-500/30 transition-colors"
-                                        >
-                                            {quick}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div>
-                                <label className="block text-sm font-semibold text-gray-400 mb-3 flex items-center gap-2">
-                                    <MapPin className="w-4 h-4" />
-                                    City / Region
-                                </label>
-                                <input
-                                    type="text"
-                                    value={city}
-                                    onChange={(e) => setCity(e.target.value)}
-                                    placeholder="e.g., New York, Los Angeles..."
-                                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-600 focus:border-cyan-500 focus:outline-none transition-colors"
-                                    required
-                                />
-                                <div className="flex flex-wrap gap-2 mt-3">
-                                    {quickCities.map((quick) => (
-                                        <button
-                                            key={quick}
-                                            type="button"
-                                            onClick={() => setCity(quick)}
-                                            className="px-3 py-1 rounded-lg bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 text-xs font-semibold hover:bg-indigo-500/30 transition-colors"
-                                        >
-                                            {quick}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-
-                        <button
-                            type="submit"
-                            disabled={loading}
-                            className="w-full px-8 py-4 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold text-lg hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-2"
-                        >
-                            {loading ? (
-                                <>
-                                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                                    Finding Leads...
-                                </>
-                            ) : (
-                                <>
-                                    <Search className="w-5 h-5" />
-                                    Find Leads with AI
-                                </>
-                            )}
-                        </button>
-                    </form>
+                    <AILeadChat />
                 </div>
             </section>
 

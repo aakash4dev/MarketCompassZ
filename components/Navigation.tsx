@@ -28,9 +28,11 @@ export default function Navigation() {
     };
 
     const navLinks = [
-        { href: '/', label: 'Home' },
-        { href: '/dashboard', label: 'Dashboard' },
-        { href: '/discovery', label: 'Discovery' },
+        { label: 'Home', href: '/' },
+        { label: 'Dashboard', href: '/dashboard' },
+        { label: 'Discovery', href: '/discovery' },
+        { label: 'Toppers', href: '/toppers' },
+        { label: 'Blog', href: '/blog' },
     ];
 
     return (
