@@ -182,7 +182,7 @@ export default function HomePage() {
                                     title: 'AI Agent Scans',
                                     desc: 'Our ADK-powered agent autonomously searches Google Maps and cross-references multiple data sources.',
                                     num: '02',
-                                    align: 'left'
+                                    align: 'right'
                                 },
                                 {
                                     icon: <CheckCircle2 className="w-8 h-8" />,
@@ -196,7 +196,7 @@ export default function HomePage() {
                                     title: 'Start Pitching',
                                     desc: 'Contact high-quality leads directly with all the info you need to close the deal.',
                                     num: '04',
-                                    align: 'left'
+                                    align: 'right'
                                 }
                             ].map((step, i) => (
                                 <div key={i} className={`flex items-center gap-8`}>
