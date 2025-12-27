@@ -35,12 +35,12 @@ You mentioned you've already initialized Firebase. Here's what you need to enabl
    - Click "Done"
 
 ### Firebase Configuration ✅
-You already have these from your Firebase project:
+You already have these from your Firebase project (stored in your `.env` file):
 ```env
-NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyBKcwUm9-Qi10PM2QYyrIpIjcwRIQE6PYg
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=marketcompass-47d8e.firebaseapp.com
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=marketcompass-47d8e
-# ... (you have all these)
+NEXT_PUBLIC_FIREBASE_API_KEY=your_key_here
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your-project-id
+# ... (check your .env file for complete list)
 ```
 
 ---
@@ -51,7 +51,7 @@ NEXT_PUBLIC_FIREBASE_PROJECT_ID=marketcompass-47d8e
 
 1. Go to [Google Cloud Console](https://console.cloud.google.com/)
 2. **Option A**: Link your existing Firebase project
-   - Your Firebase project `marketcompass-47d8e` is already a GCP project
+   - Your Firebase project is already a GCP project
    - Select it from the project dropdown at the top
    
 3. **Option B**: If you don't see it, enable Firebase integration:
@@ -74,7 +74,7 @@ NEXT_PUBLIC_FIREBASE_PROJECT_ID=marketcompass-47d8e
 #### Enable Vertex AI API
 
 1. Go to [Vertex AI API](https://console.cloud.google.com/apis/library/aiplatform.googleapis.com)
-2. Make sure your project `marketcompass-47d8e` is selected
+2. Make sure your project is selected
 3. Click **"Enable"**
 4. Wait 1-2 minutes for activation
 
@@ -87,10 +87,10 @@ For the hackathon, you can use the **Gemini API** directly instead of Vertex AI:
 1. Go to [Google AI Studio](https://makersuite.google.com/app/apikey)
 2. Click **"Create API Key"**
 3. Select your project or create a new one
-4. Copy the API key ✅ You already have this: `AIzaSyD8M9kC6BgAmp_7pWYM-s8_jvXYXC9h-y8`
+4. Copy the API key and store it in your `.env` file
 
 ```env
-GEMINI_API_KEY=AIzaSyD8M9kC6BgAmp_7pWYM-s8_jvXYXC9h-y8
+GEMINI_API_KEY=your_gemini_api_key_here
 ```
 
 **Option 2: Vertex AI Service Account (Production)**
@@ -158,43 +158,49 @@ GOOGLE_MAPS_API_KEY=YOUR_MAPS_API_KEY_HERE
 
 ## 📝 Complete .env File
 
-Here's your complete `.env` file template:
+Here's your complete `.env` file template with **PLACEHOLDERS** (replace with your actual keys):
 
 ```env
 # ============================================
-# FIREBASE CONFIGURATION (You already have these)
+# FIREBASE CONFIGURATION
 # ============================================
-NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyBKcwUm9-Qi10PM2QYyrIpIjcwRIQE6PYg
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=marketcompass-47d8e.firebaseapp.com
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=marketcompass-47d8e
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=marketcompass-47d8e.firebasestorage.app
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=634650666418
-NEXT_PUBLIC_FIREBASE_APP_ID=1:634650666418:web:18c312bd390d740e23f0ab
-NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=G-JRDTEFHX2H
+# Get these from Firebase Console → Project Settings → General
+NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key_here
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your-project-id.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your-project-id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your-project-id.firebasestorage.app
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id_here
+NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id_here
+NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=your_measurement_id_here
 
 # Firebase Admin SDK (Backend Only)
-FIREBASE_PROJECT_ID=marketcompass-47d8e
-FIREBASE_PRIVATE_KEY_ID=d375c61da3bf53aa70ff5ed5c1794f00739d674c
-FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n[YOUR PRIVATE KEY]\n-----END PRIVATE KEY-----\n"
-FIREBASE_CLIENT_EMAIL=firebase-adminsdk-fbsvc@marketcompass-47d8e.iam.gserviceaccount.com
-FIREBASE_CLIENT_ID=100324248449962728479
+# Get these from Firebase Console → Project Settings → Service Accounts
+FIREBASE_PROJECT_ID=your-project-id
+FIREBASE_PRIVATE_KEY_ID=your_private_key_id_here
+FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nYOUR_PRIVATE_KEY_HERE\n-----END PRIVATE KEY-----\n"
+FIREBASE_CLIENT_EMAIL=firebase-adminsdk-xxxxx@your-project-id.iam.gserviceaccount.com
+FIREBASE_CLIENT_ID=your_client_id_here
 
 # ============================================
-# GEMINI AI (You already have this)
+# GEMINI AI
 # ============================================
-GEMINI_API_KEY=AIzaSyD8M9kC6BgAmp_7pWYM-s8_jvXYXC9h-y8
+# Get from: https://makersuite.google.com/app/apikey
+GEMINI_API_KEY=your_gemini_api_key_here
 
 # ============================================
-# GOOGLE CLOUD / VERTEX AI (Get these)
+# GOOGLE CLOUD / VERTEX AI
 # ============================================
-GOOGLE_CLOUD_PROJECT=marketcompass-47d8e
+GOOGLE_CLOUD_PROJECT=your-project-id
 VERTEX_AI_LOCATION=us-central1
 
 # ============================================
-# GOOGLE MAPS API (Get this)
+# GOOGLE MAPS API
 # ============================================
-GOOGLE_MAPS_API_KEY=GET_THIS_FROM_GOOGLE_CLOUD_CONSOLE
+# Get from: Google Cloud Console → APIs & Services → Credentials
+GOOGLE_MAPS_API_KEY=your_maps_api_key_here
 ```
+
+> ⚠️ **SECURITY WARNING**: Never commit your `.env` file to Git! It's already in `.gitignore`.
 
 ---
 
