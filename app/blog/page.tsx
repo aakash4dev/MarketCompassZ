@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Clock, User, ArrowRight } from 'lucide-react';
 import { blogPosts } from '@/lib/blogData';
 
@@ -43,9 +44,14 @@ export default function BlogPage() {
                     {filteredPosts.map((post) => (
                         <Link key={post.id} href={`/blog/${post.slug}`}>
                             <div className="glass rounded-2xl overflow-hidden border border-white/10 hover:border-cyan-500/50 transition-all group h-full">
-                                {/* Image Placeholder */}
-                                <div className="h-48 bg-gradient-to-br from-cyan-600 to-blue-600 flex items-center justify-center">
-                                    <span className="text-white/50 text-6xl font-black">{post.id}</span>
+                                {/* Blog Image */}
+                                <div className="relative h-48 bg-gradient-to-br from-cyan-600 to-blue-600 overflow-hidden">
+                                    <Image
+                                        src={`/${post.image}.png`}
+                                        alt={post.title}
+                                        fill
+                                        className="object-cover group-hover:scale-110 transition-transform duration-300"
+                                    />
                                 </div>
 
                                 <div className="p-6">

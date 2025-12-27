@@ -3,6 +3,9 @@ import {
     GoogleAuthProvider,
     signOut as firebaseSignOut,
     onAuthStateChanged,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    sendPasswordResetEmail,
     User
 } from 'firebase/auth';
 import { auth } from './config';
@@ -15,6 +18,35 @@ export const signInWithGoogle = async (): Promise<User> => {
         return result.user;
     } catch (error) {
         console.error('Error signing in with Google:', error);
+        throw error;
+    }
+};
+
+export const signUpWithEmail = async (email: string, password: string): Promise<User> => {
+    try {
+        const result = await createUserWithEmailAndPassword(auth, email, password);
+        return result.user;
+    } catch (error) {
+        console.error('Error signing up with email:', error);
+        throw error;
+    }
+};
+
+export const signInWithEmail = async (email: string, password: string): Promise<User> => {
+    try {
+        const result = await signInWithEmailAndPassword(auth, email, password);
+        return result.user;
+    } catch (error) {
+        console.error('Error signing in with email:', error);
+        throw error;
+    }
+};
+
+export const resetPassword = async (email: string): Promise<void> => {
+    try {
+        await sendPasswordResetEmail(auth, email);
+    } catch (error) {
+        console.error('Error sending password reset email:', error);
         throw error;
     }
 };

@@ -1,10 +1,10 @@
 export const blogPosts = [
-    {
-        id: 1,
-        slug: 'how-to-find-small-businesses-without-websites',
-        title: 'How to Find Small Businesses Without Websites in 2025',
-        excerpt: 'Learn the exact strategies top freelancers use to discover hundreds of businesses without digital presence.',
-        content: `# How to Find Small Businesses Without Websites in 2025
+  {
+    id: 1,
+    slug: 'how-to-find-small-businesses-without-websites',
+    title: 'How to Find Small Businesses Without Websites in 2025',
+    excerpt: 'Learn the exact strategies top freelancers use to discover hundreds of businesses without digital presence.',
+    content: `# How to Find Small Businesses Without Websites in 2025
 
 Finding businesses without websites is like discovering gold mines. These are companies that need your services the most but haven't been reached yet.
 
@@ -66,18 +66,18 @@ Once you have your leads:
 Stop wasting hours on manual searches. Use AI to find perfect leads in minutes, then focus your energy on closing deals.
 
 **Ready to try it?** [Start your free search on MarketCompassZ →](/)`,
-        author: 'Aakash Singh Rajput',
-        date: '2025-12-20',
-        readTime: '8 min read',
-        category: 'Strategy',
-        image: 'blog_1_finding_businesses'
-    },
-    {
-        id: 2,
-        slug: 'cold-calling-script-for-web-development',
-        title: 'The Perfect Cold Calling Script for Web Developers',
-        excerpt: 'A proven script that converts 30%+ of cold calls into meetings. Used by 500+ successful developers.',
-        content: `# The Perfect Cold Calling Script for Web Developers
+    author: 'Aakash Singh Rajput',
+    date: '2025-12-20',
+    readTime: '8 min read',
+    category: 'Strategy',
+    image: 'blog_1_finding_businesses_1766827378849'
+  },
+  {
+    id: 2,
+    slug: 'cold-calling-script-for-web-development',
+    title: 'The Perfect Cold Calling Script for Web Developers',
+    excerpt: 'A proven script that converts 30%+ of cold calls into meetings. Used by 500+ successful developers.',
+    content: `# The Perfect Cold Calling Script for Web Developers
 
 Cold calling isn't dead — it's just evolved. Here's the exact script that helped me close $50K+ in web projects.
 
@@ -144,18 +144,18 @@ Cold calling isn't dead — it's just evolved. Here's the exact script that help
 Cold calling works when you target the right businesses and have a proven script. Focus on providing value, not making sales.
 
 **Need qualified leads to call?** [Find businesses without websites →](/)`,
-        author: 'Aakash Singh Rajput',
-        date: '2025-12-18',
-        readTime: '10 min read',
-        category: 'Sales',
-        image: 'blog_2_cold_calling'
-    },
-    {
-        id: 3,
-        slug: 'google-maps-api-for-lead-generation',
-        title: 'Using Google Maps API for Lead Generation: Complete Guide',
-        excerpt: 'Technical deep-dive into leveraging Google Maps Places API to find and qualify business leads automatically.',
-        content: `# Using Google Maps API for Lead Generation
+    author: 'Aakash Singh Rajput',
+    date: '2025-12-18',
+    readTime: '10 min read',
+    category: 'Sales',
+    image: 'blog_2_cold_calling_1766827395507'
+  },
+  {
+    id: 3,
+    slug: 'google-maps-api-for-lead-generation',
+    title: 'Using Google Maps API for Lead Generation: Complete Guide',
+    excerpt: 'Technical deep-dive into leveraging Google Maps Places API to find and qualify business leads automatically.',
+    content: `# Using Google Maps API for Lead Generation
 
 Google Maps is sitting on a goldmine of business data. Here's how to tap into it programmatically.
 
@@ -257,12 +257,12 @@ Use Gemini AI to:
 Building this from scratch takes weeks. Tools like MarketCompassZ have this built-in with AI-powered qualification.
 
 **Try it free** → [MarketCompassZ](/)`,
-        author: 'Aakash Singh Rajput',
-        date: '2025-12-15',
-        readTime: '12 min read',
-        category: 'Technical',
-        image: 'blog_3_google_maps_api'
-    }
+    author: 'Aakash Singh Rajput',
+    date: '2025-12-15',
+    readTime: '12 min read',
+    category: 'Technical',
+    image: 'blog_3_google_maps_api_1766827414219'
+  }
 ];
 
 export default blogPosts;
