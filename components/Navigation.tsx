@@ -30,7 +30,6 @@ export default function Navigation() {
 
     const navLinks = [
         { label: 'Home', href: '/' },
-        { label: 'Dashboard', href: '/dashboard' },
         { label: 'Discovery', href: '/discovery' },
         { label: 'Toppers', href: '/toppers' },
         { label: 'Blog', href: '/blog' },

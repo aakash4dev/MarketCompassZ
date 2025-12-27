@@ -6,10 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "check-apis": "node --env-file=.env scripts/check-apis.js"
   },
   "dependencies": {
     "@google-cloud/aiplatform": "^3.30.0",
+    "@google/generative-ai": "^0.24.1",
     "@googlemaps/google-maps-services-js": "^3.4.0",
     "@types/react-google-recaptcha": "^2.1.9",
     "autoprefixer": "^10.4.23",

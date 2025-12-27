@@ -48,45 +48,35 @@ export default function AILeadChat() {
         setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
         setIsLoading(true);
 
-        // Simulate AI processing (replace with actual Gemini API call)
-        setTimeout(() => {
-            // Mock lead generation based on user query
-            const mockLeads: Lead[] = [
-                {
-                    name: 'Sharma Trading Co.',
-                    address: 'Karol Bagh, Delhi',
-                    phone: '+91-9876543210',
-                    rating: 4.2,
-                    reviews: 156,
-                    category: 'General Store'
-                },
-                {
-                    name: 'Elite Boutique',
-                    address: 'Connaught Place, Delhi',
-                    phone: '+91-9876543211',
-                    rating: 4.5,
-                    reviews: 89,
-                    category: 'Fashion'
-                },
-                {
-                    name: 'Mumbai Spice Restaurant',
-                    address: 'Punjabi Bagh, Delhi',
-                    phone: '+91-9876543212',
-                    rating: 4.8,
-                    reviews: 342,
-                    category: 'Restaurant'
-                }
-            ];
+        try {
+            const response = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: userMessage })
+            });
 
+            if (!response.ok) throw new Error('Failed to fetch');
+
+            const data = await response.json();
+
+            // Add AI response
             const aiResponse: Message = {
                 role: 'assistant',
-                content: `I found ${mockLeads.length} businesses matching your criteria. All of them don't have a website and are perfect prospects for your services!`,
-                leads: mockLeads
+                content: data.content,
+                leads: data.leads
             };
 
             setMessages(prev => [...prev, aiResponse]);
+        } catch (error) {
+            console.error('Chat error:', error);
+            // Error fallback
+            setMessages(prev => [...prev, {
+                role: 'assistant',
+                content: "I'm having trouble connecting to the server right now. Please try again in a moment."
+            }]);
+        } finally {
             setIsLoading(false);
-        }, 2000);
+        }
     };
 
     return (
@@ -113,8 +103,8 @@ export default function AILeadChat() {
                             {/* Message Bubble */}
                             <div
                                 className={`rounded-2xl p-4 ${message.role === 'user'
-                                        ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white'
-                                        : 'bg-white/5 border border-white/10 text-white'
+                                    ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white'
+                                    : 'bg-white/5 border border-white/10 text-white'
                                     }`}
                             >
                                 <p className="text-sm leading-relaxed">{message.content}</p>

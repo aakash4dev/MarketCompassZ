@@ -60,6 +60,7 @@ export const metadata: Metadata = {
         "theme-color": "#0ea5e9",
         "color-scheme": "dark",
     },
+    metadataBase: new URL('http://localhost:3000'),
 };
 
 export default function RootLayout({

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { TrendingUp, Zap, Users, ArrowRight, Play, Sparkles, Globe, BarChart3, Shield, Rocket, CheckCircle2, Search, Briefcase, MapPin } from 'lucide-react';
+import { TrendingUp, Zap, Users, ArrowRight, Play, Sparkles, Globe, BarChart3, Shield, Rocket, CheckCircle2, Search, Briefcase, MapPin, DollarSign, PieChart } from 'lucide-react';
 import AILeadChat from '@/components/AILeadChat';
 
 export default function HomePage() {
@@ -10,11 +10,29 @@ export default function HomePage() {
         <div className="min-h-screen">
             {/* Hero Section */}
             <section className="relative px-4 py-20 md:py-32 overflow-hidden">
-                {/* Background Elements */}
-                <div className="absolute inset-0 -z-10">
+                {/* Background Elements & Floating Animations */}
+                <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
+                    {/* Gradients */}
                     <div className="absolute top-20 right-10 w-72 h-72 bg-indigo-600/20 rounded-full mix-blend-screen filter blur-3xl opacity-50 animate-float" />
                     <div className="absolute bottom-20 left-10 w-72 h-72 bg-pink-600/20 rounded-full mix-blend-screen filter blur-3xl opacity-50 animate-float" style={{ animationDelay: '2s' }} />
                     <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-600/20 rounded-full mix-blend-screen filter blur-3xl opacity-30 animate-float" style={{ animationDelay: '4s' }} />
+
+                    {/* Floating Icons */}
+                    <div className="absolute top-1/4 left-1/4 animate-float opacity-20" style={{ animationDelay: '0s' }}>
+                        <DollarSign className="w-16 h-16 text-cyan-400" />
+                    </div>
+                    <div className="absolute top-1/3 right-1/4 animate-float opacity-20" style={{ animationDelay: '2s' }}>
+                        <Search className="w-12 h-12 text-purple-400" />
+                    </div>
+                    <div className="absolute bottom-1/4 left-1/3 animate-float opacity-20" style={{ animationDelay: '4s' }}>
+                        <PieChart className="w-14 h-14 text-pink-400" />
+                    </div>
+                    <div className="absolute bottom-1/3 right-1/4 animate-float opacity-20" style={{ animationDelay: '1.5s' }}>
+                        <TrendingUp className="w-16 h-16 text-blue-400" />
+                    </div>
+                    <div className="absolute top-20 left-20 animate-float opacity-10" style={{ animationDelay: '3s' }}>
+                        <Sparkles className="w-10 h-10 text-yellow-400" />
+                    </div>
                 </div>
 
                 <div className="max-w-6xl mx-auto text-center">
@@ -175,45 +193,45 @@ export default function HomePage() {
                                     title: 'Enter Your Criteria',
                                     desc: "Choose a business niche (like 'Plumbers' or 'Restaurants') and a target city or region.",
                                     num: '01',
-                                    align: 'left'
+                                    align: 'right'
                                 },
                                 {
                                     icon: <Sparkles className="w-8 h-8" />,
                                     title: 'AI Agent Scans',
                                     desc: 'Our ADK-powered agent autonomously searches Google Maps and cross-references multiple data sources.',
                                     num: '02',
-                                    align: 'right'
+                                    align: 'left'
                                 },
                                 {
                                     icon: <CheckCircle2 className="w-8 h-8" />,
                                     title: 'Leads Discovered',
                                     desc: 'Businesses without websites or apps are identified, scored, and added to your dashboard in real-time.',
                                     num: '03',
-                                    align: 'left'
+                                    align: 'right'
                                 },
                                 {
                                     icon: <Rocket className="w-8 h-8" />,
                                     title: 'Start Pitching',
                                     desc: 'Contact high-quality leads directly with all the info you need to close the deal.',
                                     num: '04',
-                                    align: 'right'
+                                    align: 'left'
                                 }
                             ].map((step, i) => (
-                                <div key={i} className={`flex items-center gap-8`}>
+                                <div key={i} className={`md:flex md:items-center md:gap-8 ${step.align === 'right' ? 'md:flex-row-reverse' : ''}`}>
                                     {/* Content */}
-                                    <div className={`flex-1`}>
-                                        <h3 className="text-2xl font-bold text-white mb-3 flex items-center gap-3">
+                                    <div className={`flex-1 mb-4 md:mb-0 ${step.align === 'left' ? 'md:text-right' : 'md:text-left'}`}>
+                                        <h3 className="text-2xl font-bold text-white mb-3">
                                             {step.title}
                                         </h3>
                                         <p className="text-gray-400 leading-relaxed">{step.desc}</p>
                                     </div>
 
                                     {/* Icon */}
-                                    <div className="relative flex-shrink-0">
+                                    <div className="relative flex-shrink-0 z-10 mb-8 md:mb-0">
                                         <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white shadow-lg shadow-cyan-500/50">
                                             {step.icon}
                                         </div>
-                                        <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white text-xs font-black">
+                                        <div className={`absolute -top-2 w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white text-xs font-black -right-2`}>
                                             {step.num}
                                         </div>
                                     </div>
