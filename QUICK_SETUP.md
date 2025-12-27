@@ -150,25 +150,25 @@ Before you start coding, verify:
 # ============================================
 # FIREBASE (You already have these)
 # ============================================
-NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyBKcwUm9-Qi10PM2QYyrIpIjcwRIQE6PYg
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=marketcompass-47d8e.firebaseapp.com
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=marketcompass-47d8e
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=marketcompass-47d8e.firebasestorage.app
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=634650666418
-NEXT_PUBLIC_FIREBASE_APP_ID=1:634650666418:web:18c312bd390d740e23f0ab
-NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=G-JRDTEFHX2H
+NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyBKcwUm9-Qxxxxxxxxxxxxxxx
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=xxxxxxxxxxxx-47d8e.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=xxxxxxxxxxxxx-47d8e
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=xxxxxxxxxxxxxxx-47d8e.firebasestorage.app
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=6346506xxxxx
+NEXT_PUBLIC_FIREBASE_APP_ID=1:xxxxxxxxxxx:web:xxxxxxxxxxxxxxxxx
+NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=G-xxxxxxxxxxxxxx
 
 # Firebase Admin SDK
-FIREBASE_PROJECT_ID=marketcompass-47d8e
-FIREBASE_PRIVATE_KEY_ID=d375c61da3bf53aa70ff5ed5c1794f00739d674c
+FIREBASE_PROJECT_ID=marketcxxxxxxxxx
+FIREBASE_PRIVATE_KEY_ID=d375c61da3bf53axxxxxxxxxxxxxx
 FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n[YOUR PRIVATE KEY]\n-----END PRIVATE KEY-----\n"
-FIREBASE_CLIENT_EMAIL=firebase-adminsdk-fbsvc@marketcompass-47d8e.iam.gserviceaccount.com
-FIREBASE_CLIENT_ID=100324248449962728479
+FIREBASE_CLIENT_EMAIL=firebase-adminxxxxxxxx@marketcompass-47d8e.iam.gserviceaccount.com
+FIREBASE_CLIENT_ID=1003xxxxxxxxxxxxx
 
 # ============================================
 # GEMINI AI (You already have this)
 # ============================================
-GEMINI_API_KEY=AIzaSyD8M9kC6BgAmp_7pWYM-s8_jvXYXC9h-y8
+GEMINI_API_KEY=xxxxxxxxxxxxxxxxxxx
 
 # ============================================
 # GOOGLE CLOUD
