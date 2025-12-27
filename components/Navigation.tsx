@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { User } from 'firebase/auth';
 import { onAuthStateChange, signOut } from '@/lib/firebase/auth';
 import { LogIn, LogOut, User as UserIcon, Menu, X } from 'lucide-react';
+import Logo from '@/components/Logo';
 
 export default function Navigation() {
     const [user, setUser] = useState<User | null>(null);
@@ -37,10 +38,8 @@ export default function Navigation() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
-                    <Link href="/" className="flex items-center gap-2 group">
-                        <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-pink-600 flex items-center justify-center transform group-hover:scale-110 transition-transform">
-                            <span className="text-white font-black text-xl">M</span>
-                        </div>
+                    <Link href="/" className="flex items-center gap-3 group">
+                        <Logo size={40} className="transform group-hover:scale-110 transition-transform duration-300" />
                         <span className="text-xl font-black gradient-text hidden sm:block">MarketCompassZ</span>
                     </Link>
 
@@ -51,8 +50,8 @@ export default function Navigation() {
                                 key={link.href}
                                 href={link.href}
                                 className={`text-sm font-semibold transition-colors ${pathname === link.href
-                                        ? 'text-indigo-400'
-                                        : 'text-gray-300 hover:text-indigo-400'
+                                    ? 'text-indigo-400'
+                                    : 'text-gray-300 hover:text-indigo-400'
                                     }`}
                             >
                                 {link.label}
