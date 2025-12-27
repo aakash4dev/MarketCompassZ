@@ -36,6 +36,12 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# firebase
-service-account-key.json
+# environment variables
+.env
+.env*.local
+
+# Firebase rules (contains security configuration)
+firestore.rules
+storage.rules
+e-account-key.json
 setup-env.sh
