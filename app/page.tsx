@@ -68,7 +68,10 @@ export default function HomePage() {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                             </svg>
                         </Link>
-                        <button className="px-8 py-4 rounded-xl border-2 border-gray-700 text-white font-bold text-lg hover:bg-white/5 transition-all duration-300 flex items-center gap-2">
+                        <button
+                            onClick={() => document.getElementById('live-demo')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+                            className="px-8 py-4 rounded-xl border-2 border-gray-700 text-white font-bold text-lg hover:bg-white/5 transition-all duration-300 flex items-center gap-2"
+                        >
                             <Play className="w-5 h-5" />
                             Watch Demo
                         </button>
@@ -99,13 +102,13 @@ export default function HomePage() {
             </section>
 
             {/* AI Chat Interface Section */}
-            <section className="relative px-4 py-20">
+            <section id="live-demo" className="relative px-4 py-20 scroll-mt-24">
                 <div className="max-w-4xl mx-auto">
                     <div className="text-center mb-12">
                         <h2 className="text-4xl md:text-5xl font-black text-white mb-4">
                             Start Your <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Lead Hunt</span>
                         </h2>
-                        <p className="text-gray-400 text-lg">Chat with AI to find exactly what you need — ratings, location, niche, and more!</p>
+                        <p className="text-gray-400 text-lg">Chat with AI to find exactly what you need — ratings, location, niche, and more! This is a live demo, no sign-up required.</p>
                     </div>
 
                     <AILeadChat />

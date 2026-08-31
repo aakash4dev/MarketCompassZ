@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import { Trophy, Star, MapPin, Phone, ExternalLink, Award, Crown } from 'lucide-react';
 
 // --- Mock "Elite" Data ---
@@ -43,6 +44,17 @@ const runnerUps = [
 ];
 
 export default function ToppersPage() {
+    const router = useRouter();
+
+    const viewOnMaps = (name: string, location: string) => {
+        const query = encodeURIComponent(`${name}, ${location}`);
+        window.open(`https://www.google.com/maps/search/?api=1&query=${query}`, '_blank', 'noopener,noreferrer');
+    };
+
+    const claimLead = () => {
+        router.push('/auth?mode=signup');
+    };
+
     return (
         <div className="min-h-screen bg-black text-white pt-24 pb-20 px-4">
 
@@ -79,7 +91,10 @@ export default function ToppersPage() {
                                     <span className="text-gray-500 text-sm">({podiumLeads[1].reviews})</span>
                                 </div>
                                 <div className="text-sm text-gray-400 mb-6">{podiumLeads[1].location}</div>
-                                <button className="w-full py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-xl font-semibold transition-colors">
+                                <button
+                                    onClick={() => viewOnMaps(podiumLeads[1].name, podiumLeads[1].location)}
+                                    className="w-full py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-xl font-semibold transition-colors"
+                                >
                                     View Details
                                 </button>
                             </div>
@@ -105,7 +120,10 @@ export default function ToppersPage() {
                                     <span className="font-bold ml-2 text-lg">{podiumLeads[0].rating}</span>
                                 </div>
                                 <p className="text-gray-400 text-sm mb-8">{podiumLeads[0].reviews} Verified Reviews • No Website</p>
-                                <button className="w-full py-4 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-black font-bold text-lg rounded-xl shadow-lg shadow-yellow-500/20 transition-all">
+                                <button
+                                    onClick={claimLead}
+                                    className="w-full py-4 bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-400 hover:to-yellow-500 text-black font-bold text-lg rounded-xl shadow-lg shadow-yellow-500/20 transition-all"
+                                >
                                     Claim This Lead
                                 </button>
                             </div>
@@ -126,7 +144,10 @@ export default function ToppersPage() {
                                     <span className="text-gray-500 text-sm">({podiumLeads[2].reviews})</span>
                                 </div>
                                 <div className="text-sm text-gray-400 mb-6">{podiumLeads[2].location}</div>
-                                <button className="w-full py-3 bg-white/10 hover:bg-white/20 text-white rounded-xl font-semibold transition-colors">
+                                <button
+                                    onClick={() => viewOnMaps(podiumLeads[2].name, podiumLeads[2].location)}
+                                    className="w-full py-3 bg-white/10 hover:bg-white/20 text-white rounded-xl font-semibold transition-colors"
+                                >
                                     View Details
                                 </button>
                             </div>
@@ -146,7 +167,14 @@ export default function ToppersPage() {
                     </div>
                     <div>
                         {runnerUps.map((lead) => (
-                            <div key={lead.rank} className="flex items-center justify-between p-6 border-b border-white/5 hover:bg-white/5 transition-colors group cursor-pointer">
+                            <div
+                                key={lead.rank}
+                                onClick={() => viewOnMaps(lead.name, lead.location)}
+                                role="button"
+                                tabIndex={0}
+                                onKeyDown={(e) => { if (e.key === 'Enter') viewOnMaps(lead.name, lead.location); }}
+                                className="flex items-center justify-between p-6 border-b border-white/5 hover:bg-white/5 transition-colors group cursor-pointer"
+                            >
                                 <div className="flex items-center gap-6">
                                     <span className="text-2xl font-black text-white/20 group-hover:text-yellow-500/50 transition-colors w-8">
                                         #{lead.rank}

@@ -1,14 +1,16 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { onAuthStateChange } from '@/lib/firebase/auth';
-import { User } from 'firebase/auth';
+import { onAuthStateChange, AppUser } from '@/lib/firebase/auth';
 import { useRouter } from 'next/navigation';
+import { getUserProfile, saveUserProfile, UserProfile } from '@/lib/firebase/userProfile';
 
 export default function ProfilePage() {
     const router = useRouter();
-    const [user, setUser] = useState<User | null>(null);
+    const [user, setUser] = useState<AppUser | null>(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [isSaving, setIsSaving] = useState(false);
+    const [saveStatus, setSaveStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
     // Profile fields
     const [name, setName] = useState('');
@@ -18,10 +20,22 @@ export default function ProfilePage() {
     const [bio, setBio] = useState('');
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChange((currentUser) => {
+        const unsubscribe = onAuthStateChange(async (currentUser) => {
             if (currentUser) {
                 setUser(currentUser);
                 setName(currentUser.displayName || '');
+                try {
+                    const data = await getUserProfile(currentUser.uid);
+                    if (data) {
+                        setName(data.name || currentUser.displayName || '');
+                        setOccupation(data.occupation || '');
+                        setGender(data.gender || '');
+                        setLocation(data.location || '');
+                        setBio(data.bio || '');
+                    }
+                } catch {
+                    // Non-critical: profile data fetch failed, use defaults
+                }
                 setIsLoading(false);
             } else {
                 router.push('/auth');
@@ -31,9 +45,19 @@ export default function ProfilePage() {
         return () => unsubscribe();
     }, [router]);
 
-    const handleSaveProfile = () => {
-        // TODO: Save to Firestore
-        alert('Profile saved! (Firestore integration pending)');
+    const handleSaveProfile = async () => {
+        if (!user) return;
+        setIsSaving(true);
+        setSaveStatus('idle');
+        try {
+            await saveUserProfile(user.uid, { name, occupation, gender, location, bio });
+            setSaveStatus('success');
+            setTimeout(() => setSaveStatus('idle'), 3000);
+        } catch {
+            setSaveStatus('error');
+        } finally {
+            setIsSaving(false);
+        }
     };
 
     if (isLoading) {
@@ -141,12 +165,19 @@ export default function ProfilePage() {
                         </div>
 
                         {/* Save Button */}
+                        {saveStatus === 'success' && (
+                            <p className="text-green-400 text-sm text-center">✓ Profile saved successfully!</p>
+                        )}
+                        {saveStatus === 'error' && (
+                            <p className="text-red-400 text-sm text-center">Failed to save profile. Please try again.</p>
+                        )}
                         <div className="flex gap-4 pt-4">
                             <button
                                 onClick={handleSaveProfile}
-                                className="btn-primary flex-1"
+                                disabled={isSaving}
+                                className="btn-primary flex-1 disabled:opacity-60"
                             >
-                                Save Changes
+                                {isSaving ? 'Saving…' : 'Save Changes'}
                             </button>
                             <button
                                 onClick={() => router.push('/dashboard')}

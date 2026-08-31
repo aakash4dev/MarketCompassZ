@@ -33,11 +33,18 @@ export default function LeadsTable({ leads }: LeadsTableProps) {
                     >
                         <div className="flex justify-between items-start gap-4">
                             <div className="flex-1 space-y-2">
-                                <div className="flex items-start justify-between">
+                                <div className="flex items-start justify-between gap-3">
                                     <h3 className="text-xl font-semibold text-primary-300">{lead.businessName}</h3>
-                                    <span className="text-xs px-3 py-1 rounded-full glass text-accent-300 border border-accent-500/30">
-                                        {lead.niche}
-                                    </span>
+                                    <div className="flex flex-col items-end gap-1 shrink-0">
+                                        <span className="text-xs px-3 py-1 rounded-full glass text-accent-300 border border-accent-500/30">
+                                            {lead.niche}
+                                        </span>
+                                        {lead.createdAt && (
+                                            <span className="text-[11px] text-gray-500">
+                                                {new Date(lead.createdAt).toLocaleString()}
+                                            </span>
+                                        )}
+                                    </div>
                                 </div>
 
                                 <div className="space-y-1 text-sm text-gray-400">

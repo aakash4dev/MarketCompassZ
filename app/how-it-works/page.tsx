@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function HowItWorksPage() {
     const steps = [
         {
@@ -126,11 +128,11 @@ export default function HowItWorksPage() {
                         See It In Action
                     </h2>
                     <p className="text-xl text-gray-300 mb-8">
-                        Try it yourself - it's free to get started
+                        Try it yourself - it&apos;s free to get started
                     </p>
-                    <a href="/" className="btn-primary text-lg px-8 py-4 inline-block">
+                    <Link href="/" className="btn-primary text-lg px-8 py-4 inline-block">
                         Start Generating Leads
-                    </a>
+                    </Link>
                 </div>
             </section>
         </div>

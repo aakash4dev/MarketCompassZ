@@ -6,36 +6,71 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     sendPasswordResetEmail,
-    User
+    User,
 } from 'firebase/auth';
-import { auth } from './config';
+import { auth, isFirebaseConfigured } from './config';
+import {
+    mockSignInWithGoogle,
+    mockSignUpWithEmail,
+    mockSignInWithEmail,
+    mockResetPassword,
+    mockSignOut,
+    mockOnAuthStateChange,
+    AppUser,
+} from '@/lib/mock/localAuth';
+
+export type { AppUser } from '@/lib/mock/localAuth';
 
 const googleProvider = new GoogleAuthProvider();
 
-export const signInWithGoogle = async (): Promise<User> => {
+/** Normalizes a real Firebase `User` down to the app-wide `AppUser` shape. */
+function toAppUser(user: User): AppUser {
+    return {
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+        metadata: {
+            creationTime: user.metadata.creationTime,
+            lastSignInTime: user.metadata.lastSignInTime,
+        },
+    };
+}
+
+/**
+ * All exports below transparently use real Firebase Authentication when
+ * `isFirebaseConfigured` is true, and fall back to the localStorage-backed
+ * mock in lib/mock/localAuth.ts otherwise. This lets the rest of the app
+ * (Navigation, auth page, profile page, dashboard) call a single consistent
+ * API regardless of whether a Firebase project is actually wired up.
+ */
+export const signInWithGoogle = async (): Promise<AppUser> => {
+    if (!isFirebaseConfigured) return mockSignInWithGoogle();
     try {
         const result = await signInWithPopup(auth, googleProvider);
-        return result.user;
+        return toAppUser(result.user);
     } catch (error) {
         console.error('Error signing in with Google:', error);
         throw error;
     }
 };
 
-export const signUpWithEmail = async (email: string, password: string): Promise<User> => {
+export const signUpWithEmail = async (email: string, password: string): Promise<AppUser> => {
+    if (!isFirebaseConfigured) return mockSignUpWithEmail(email, password);
     try {
         const result = await createUserWithEmailAndPassword(auth, email, password);
-        return result.user;
+        return toAppUser(result.user);
     } catch (error) {
         console.error('Error signing up with email:', error);
         throw error;
     }
 };
 
-export const signInWithEmail = async (email: string, password: string): Promise<User> => {
+export const signInWithEmail = async (email: string, password: string): Promise<AppUser> => {
+    if (!isFirebaseConfigured) return mockSignInWithEmail(email, password);
     try {
         const result = await signInWithEmailAndPassword(auth, email, password);
-        return result.user;
+        return toAppUser(result.user);
     } catch (error) {
         console.error('Error signing in with email:', error);
         throw error;
@@ -43,6 +78,7 @@ export const signInWithEmail = async (email: string, password: string): Promise<
 };
 
 export const resetPassword = async (email: string): Promise<void> => {
+    if (!isFirebaseConfigured) return mockResetPassword(email);
     try {
         await sendPasswordResetEmail(auth, email);
     } catch (error) {
@@ -52,6 +88,7 @@ export const resetPassword = async (email: string): Promise<void> => {
 };
 
 export const signOut = async (): Promise<void> => {
+    if (!isFirebaseConfigured) return mockSignOut();
     try {
         await firebaseSignOut(auth);
     } catch (error) {
@@ -60,6 +97,7 @@ export const signOut = async (): Promise<void> => {
     }
 };
 
-export const onAuthStateChange = (callback: (user: User | null) => void) => {
-    return onAuthStateChanged(auth, callback);
+export const onAuthStateChange = (callback: (user: AppUser | null) => void): (() => void) => {
+    if (!isFirebaseConfigured) return mockOnAuthStateChange(callback);
+    return onAuthStateChanged(auth, (user) => callback(user ? toAppUser(user) : null));
 };

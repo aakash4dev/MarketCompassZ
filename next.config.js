@@ -1,6 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
+    images: {
+        remotePatterns: [
+            { protocol: 'https', hostname: 'api.dicebear.com' },
+            { protocol: 'https', hostname: 'picsum.photos' },
+        ],
+    },
     env: {
         NEXT_PUBLIC_FIREBASE_API_KEY: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
         NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,

@@ -9,7 +9,7 @@ export default function TermsPage() {
                     <section>
                         <h2 className="text-2xl font-bold text-white mb-4">1. Acceptance of Terms</h2>
                         <p className="text-gray-300 leading-relaxed">
-                            By accessing and using MarketCompassZ ("the Service"), you accept and agree to be bound by the terms and provisions of this agreement. If you do not agree to these Terms of Service, please do not use the Service.
+                            By accessing and using MarketCompassZ (&quot;the Service&quot;), you accept and agree to be bound by the terms and provisions of this agreement. If you do not agree to these Terms of Service, please do not use the Service.
                         </p>
                     </section>
 
@@ -57,7 +57,7 @@ export default function TermsPage() {
                         <ul className="list-disc list-inside text-gray-300 space-y-2 ml-4">
                             <li>Comply with Google Maps Platform Terms of Service</li>
                             <li>Use business data obtained through the Service ethically and legally</li>
-                            <li>Respect business owners' privacy and communication preferences</li>
+                            <li>Respect business owners&apos; privacy and communication preferences</li>
                             <li>Follow applicable anti-spam and marketing laws (CAN-SPAM, GDPR, etc.)</li>
                         </ul>
                     </section>
@@ -72,7 +72,7 @@ export default function TermsPage() {
                     <section>
                         <h2 className="text-2xl font-bold text-white mb-4">7. Disclaimer of Warranties</h2>
                         <p className="text-gray-300 leading-relaxed">
-                            THE SERVICE IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND. We do not guarantee the accuracy, completeness, or timeliness of business data. Use of the Service is at your own risk.
+                            THE SERVICE IS PROVIDED &quot;AS IS&quot; AND &quot;AS AVAILABLE&quot; WITHOUT WARRANTIES OF ANY KIND. We do not guarantee the accuracy, completeness, or timeliness of business data. Use of the Service is at your own risk.
                         </p>
                     </section>
 

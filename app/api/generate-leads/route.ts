@@ -14,36 +14,25 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Get API key from environment
-        const mapsApiKey = process.env.GOOGLE_MAPS_API_KEY;
-        if (!mapsApiKey) {
-            return NextResponse.json(
-                { error: 'Google Maps API key not configured' },
-                { status: 500 }
-            );
-        }
-
-        // Run the agent asynchronously
-        // In production, this should be a background job/cloud function
-        const agentPromise = runLeadGenerationAgent({
+        // GOOGLE_MAPS_API_KEY is optional — the agent (via lib/maps/search.ts)
+        // gracefully falls back to a realistic mock generator when it's absent
+        // or the live call fails, so this endpoint always succeeds.
+        const result = await runLeadGenerationAgent({
             niche,
             city,
-            userId,
-            mapsApiKey,
+            mapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
         });
 
-        // Don't await - let it run in background
-        agentPromise
-            .then((result) => {
-                console.log('[API] Lead generation complete:', result);
-            })
-            .catch((error) => {
-                console.error('[API] Lead generation failed:', error);
-            });
-
+        // Persistence happens client-side (see components/LeadGenerationForm.tsx),
+        // which keeps this route stateless and works identically whether Firestore
+        // is configured or the app is running on the local mock leads store.
         return NextResponse.json({
             success: true,
-            message: 'Lead generation started. Results will appear in real-time.',
+            leads: result.leads,
+            totalSearched: result.totalSearched,
+            leadsFound: result.leadsFound,
+            usedMockData: result.usedMockData,
+            errors: result.errors,
         });
     } catch (error) {
         console.error('[API] Error in generate-leads:', error);

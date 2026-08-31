@@ -176,7 +176,7 @@ export default function DiscoveryPage() {
                             /* AI Prompt Mode */
                             <div className="space-y-4">
                                 <label className="block text-sm font-semibold text-white mb-2">
-                                    Describe what you're looking for (AI will understand)
+                                    Describe what you&apos;re looking for (AI will understand)
                                 </label>
                                 <textarea
                                     value={aiPrompt}

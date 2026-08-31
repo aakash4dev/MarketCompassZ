@@ -1,12 +1,19 @@
 'use client';
 
 import { signInWithGoogle, signInWithEmail, signUpWithEmail } from '@/lib/firebase/auth';
+import { isFirebaseConfigured } from '@/lib/firebase/config';
 import { useRouter } from 'next/navigation';
 import { useState, useRef } from 'react';
 import Link from 'next/link';
 import ReCAPTCHA from 'react-google-recaptcha';
 
 type AuthMode = 'login' | 'signup';
+
+// No key configured? Skip the reCAPTCHA requirement entirely rather than
+// permanently disabling the sign-in buttons — the whole point of the local
+// mock-auth fallback is that the app works with zero external setup.
+const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+const isRecaptchaEnabled = !!RECAPTCHA_SITE_KEY && !RECAPTCHA_SITE_KEY.toLowerCase().includes('your_');
 
 export default function AuthPage() {
     const router = useRouter();
@@ -23,6 +30,7 @@ export default function AuthPage() {
     const recaptchaRef = useRef<ReCAPTCHA>(null);
     const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
     const [isOver18, setIsOver18] = useState(false);
+    const recaptchaSatisfied = !isRecaptchaEnabled || !!recaptchaToken;
 
     const onRecaptchaChange = (token: string | null) => {
         setRecaptchaToken(token);
@@ -32,7 +40,7 @@ export default function AuthPage() {
     };
 
     const handleGoogleSignIn = async () => {
-        if (!recaptchaToken || !isOver18) {
+        if (!recaptchaSatisfied || !isOver18) {
             setError('Please complete the reCAPTCHA and confirm you are over 18 years old');
             return;
         }
@@ -53,7 +61,7 @@ export default function AuthPage() {
     const handleEmailAuth = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (!recaptchaToken || !isOver18) {
+        if (!recaptchaSatisfied || !isOver18) {
             setError('Please complete the reCAPTCHA and confirm you are over 18 years old');
             return;
         }
@@ -110,6 +118,11 @@ export default function AuthPage() {
 
             {/* Auth Card - Wider for large screens */}
             <div className="glass-card max-w-md lg:max-w-2xl w-full z-10 relative">
+                {!isFirebaseConfigured && (
+                    <div className="mb-6 bg-indigo-500/10 border border-indigo-500/30 rounded-lg p-3 text-indigo-300 text-xs text-center">
+                        🧪 Demo mode: no Firebase project configured, so accounts are stored locally in this browser. Add Firebase credentials to .env.local to go live.
+                    </div>
+                )}
                 {/* Tabs */}
                 <div className="flex gap-2 mb-6 glass-strong p-1 rounded-lg">
                     <button
@@ -205,16 +218,17 @@ export default function AuthPage() {
                             <div className="space-y-4 pt-2">
                                 {/* reCAPTCHA - Left aligned */}
                                 <div>
-                                    {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ? (
+                                    {isRecaptchaEnabled ? (
                                         <ReCAPTCHA
                                             ref={recaptchaRef}
-                                            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                                            sitekey={RECAPTCHA_SITE_KEY as string}
                                             onChange={onRecaptchaChange}
                                             theme="dark"
                                         />
                                     ) : (
-                                        <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4 text-yellow-400 text-sm">
-                                            reCAPTCHA site key not configured. Add NEXT_PUBLIC_RECAPTCHA_SITE_KEY to your .env file.
+                                        <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 text-blue-300 text-sm flex items-center gap-2">
+                                            <span>🔓</span>
+                                            <span>Running in demo mode — reCAPTCHA is skipped since no site key is configured. Add <code className="text-blue-200">NEXT_PUBLIC_RECAPTCHA_SITE_KEY</code> to enable it.</span>
                                         </div>
                                     )}
                                 </div>
@@ -246,7 +260,7 @@ export default function AuthPage() {
 
                             <button
                                 type="submit"
-                                disabled={isLoading || !recaptchaToken || !isOver18}
+                                disabled={isLoading || !recaptchaSatisfied || !isOver18}
                                 className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                             >
                                 {isLoading ? (
@@ -277,7 +291,7 @@ export default function AuthPage() {
                         {/* Google Sign In Button */}
                         <button
                             onClick={handleGoogleSignIn}
-                            disabled={isLoading || !recaptchaToken || !isOver18}
+                            disabled={isLoading || !recaptchaSatisfied || !isOver18}
                             className="w-full glass-strong hover:bg-white/15 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-3 border border-white/20 hover:border-white/40 hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                         >
                             {isLoading ? (

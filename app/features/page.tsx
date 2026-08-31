@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function FeaturesPage() {
     const features = [
         {
@@ -125,9 +127,9 @@ export default function FeaturesPage() {
                     <p className="text-xl text-gray-300 mb-8">
                         Sign in with Google and start generating leads in minutes
                     </p>
-                    <a href="/" className="btn-primary text-lg px-8 py-4 inline-block">
+                    <Link href="/" className="btn-primary text-lg px-8 py-4 inline-block">
                         Get Started Free
-                    </a>
+                    </Link>
                 </div>
             </section>
         </div>

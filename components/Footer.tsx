@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
     const currentYear = new Date().getFullYear();
@@ -72,7 +73,7 @@ export default function Footer() {
                     {/* Brand Column */}
                     <div className="col-span-2">
                         <div className="flex items-center gap-3 mb-4">
-                            <img src="/logo.svg" alt="MarketCompassZ" className="w-10 h-10" />
+                            <Image src="/logo.svg" alt="MarketCompassZ" width={40} height={40} className="w-10 h-10" />
                             <span className="text-xl font-bold gradient-text">MarketCompassZ</span>
                         </div>
                         <p className="text-gray-400 text-sm mb-6 max-w-xs">

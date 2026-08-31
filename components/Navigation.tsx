@@ -3,13 +3,12 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { User } from 'firebase/auth';
-import { onAuthStateChange, signOut } from '@/lib/firebase/auth';
+import { onAuthStateChange, signOut, AppUser } from '@/lib/firebase/auth';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import Logo from '@/components/Logo';
 
 export default function Navigation() {
-    const [user, setUser] = useState<User | null>(null);
+    const [user, setUser] = useState<AppUser | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [profileMenuOpen, setProfileMenuOpen] = useState(false);

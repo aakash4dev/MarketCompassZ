@@ -1,12 +1,14 @@
 'use client';
 
 import { useState } from 'react';
+import { saveLead } from '@/lib/firebase/firestore';
 
 interface LeadGenerationFormProps {
     userId: string;
+    onLeadsAdded?: (count: number) => void;
 }
 
-export default function LeadGenerationForm({ userId }: LeadGenerationFormProps) {
+export default function LeadGenerationForm({ userId, onLeadsAdded }: LeadGenerationFormProps) {
     const [niche, setNiche] = useState('');
     const [city, setCity] = useState('');
     const [loading, setLoading] = useState(false);
@@ -39,7 +41,35 @@ export default function LeadGenerationForm({ userId }: LeadGenerationFormProps) 
             const data = await response.json();
 
             if (response.ok) {
-                setMessage('✅ Lead generation started! Leads will appear below in real-time.');
+                const leads = data.leads || [];
+
+                // Persist each discovered lead. Uses real Firestore when configured,
+                // otherwise the localStorage-backed mock (lib/mock/mockLeads.ts) — either
+                // way, subscribed listeners (the dashboard) update in real time.
+                await Promise.all(
+                    leads.map((lead: any) =>
+                        saveLead({
+                            businessName: lead.businessName,
+                            address: lead.address,
+                            phone: lead.phone,
+                            location: lead.location,
+                            niche: lead.niche || niche.trim(),
+                            city: lead.city || city.trim(),
+                            hasWebsite: false,
+                            userId,
+                        })
+                    )
+                );
+
+                if (leads.length > 0) {
+                    setMessage(
+                        `✅ Found ${leads.length} new lead${leads.length === 1 ? '' : 's'}${data.usedMockData ? ' (demo data — add GOOGLE_MAPS_API_KEY for live results)' : ''}! Check the table below.`
+                    );
+                } else {
+                    setMessage('No businesses without a website were found for that search. Try a different niche or city.');
+                }
+
+                onLeadsAdded?.(leads.length);
                 setNiche('');
                 setCity('');
             } else {
