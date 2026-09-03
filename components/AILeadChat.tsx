@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Sparkles, Loader2, MapPin, Star, Phone } from 'lucide-react';
+import { Send, Search, Loader2, MapPin, Star, Phone } from 'lucide-react';
 
 interface Message {
     role: 'user' | 'assistant';
@@ -22,7 +22,7 @@ export default function AILeadChat() {
     const [messages, setMessages] = useState<Message[]>([
         {
             role: 'assistant',
-            content: "Hi! I'm your AI lead generation assistant. Tell me what kind of businesses you're looking for. For example: \"Find plumbers in New York with 4+ star ratings\" or \"Show me restaurants in Los Angeles without websites\"."
+            content: "Hi! I'm your lead generation assistant. Tell me what kind of businesses you're looking for. For example: \"Find plumbers in New York with 4+ star ratings\" or \"Show me restaurants in Los Angeles without websites\"."
         }
     ]);
     const [input, setInput] = useState('');
@@ -80,20 +80,20 @@ export default function AILeadChat() {
     };
 
     return (
-        <div className="flex flex-col h-[600px] glass rounded-2xl border border-white/10 overflow-hidden">
+        <div className="flex flex-col h-[600px] bg-white rounded-2xl border border-sand-200 overflow-hidden shadow-sm">
             {/* Chat Header */}
-            <div className="bg-gradient-to-r from-cyan-600 to-blue-600 p-4 flex items-center gap-3">
+            <div className="bg-gradient-to-r from-sunrise-500 to-rose-500 p-4 flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                    <Sparkles className="w-5 h-5 text-white" />
+                    <Search className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                    <h3 className="font-bold text-white">AI Lead Hunter</h3>
-                    <p className="text-xs text-white/80">Powered by Gemini AI & Google Maps</p>
+                    <h3 className="font-bold text-white">Lead Hunter</h3>
+                    <p className="text-xs text-white/90">Automated Prospecting System</p>
                 </div>
             </div>
 
             {/* Messages Area */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-sand-50/30">
                 {messages.map((message, index) => (
                     <div
                         key={index}
@@ -103,8 +103,8 @@ export default function AILeadChat() {
                             {/* Message Bubble */}
                             <div
                                 className={`rounded-2xl p-4 ${message.role === 'user'
-                                    ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white'
-                                    : 'bg-white/5 border border-white/10 text-white'
+                                    ? 'bg-gradient-to-r from-sunrise-500 to-rose-500 text-white shadow-sm'
+                                    : 'bg-white border border-sand-200 text-sand-800 shadow-sm'
                                     }`}
                             >
                                 <p className="text-sm leading-relaxed">{message.content}</p>
@@ -116,32 +116,32 @@ export default function AILeadChat() {
                                     {message.leads.map((lead, i) => (
                                         <div
                                             key={i}
-                                            className="bg-white/5 border border-white/10 rounded-xl p-4 hover:bg-white/10 transition-colors"
+                                            className="bg-white border border-sand-200 rounded-xl p-4 hover:border-sunrise-300 hover:shadow-md transition-all"
                                         >
                                             <div className="flex items-start justify-between mb-2">
-                                                <h4 className="font-bold text-white">{lead.name}</h4>
+                                                <h4 className="font-bold text-sand-900">{lead.name}</h4>
                                                 {lead.rating && (
-                                                    <div className="flex items-center gap-1 text-yellow-400 text-sm">
+                                                    <div className="flex items-center gap-1 text-yellow-500 text-sm font-medium">
                                                         <Star className="w-4 h-4 fill-current" />
                                                         <span>{lead.rating}</span>
-                                                        <span className="text-gray-400 text-xs">({lead.reviews})</span>
+                                                        <span className="text-sand-400 text-xs">({lead.reviews})</span>
                                                     </div>
                                                 )}
                                             </div>
-                                            <div className="space-y-1 text-sm text-gray-300">
+                                            <div className="space-y-1 text-sm text-sand-600">
                                                 <p className="flex items-center gap-2">
-                                                    <MapPin className="w-3 h-3 text-cyan-400" />
+                                                    <MapPin className="w-4 h-4 text-sunrise-500" />
                                                     {lead.address}
                                                 </p>
                                                 <p className="flex items-center gap-2">
-                                                    <Phone className="w-3 h-3 text-cyan-400" />
+                                                    <Phone className="w-4 h-4 text-sunrise-500" />
                                                     {lead.phone}
                                                 </p>
-                                                <span className="inline-block px-2 py-1 rounded-lg bg-cyan-500/20 text-cyan-300 text-xs">
+                                                <span className="inline-block px-2 py-1 mt-2 rounded-lg bg-sunrise-50 text-sunrise-700 text-xs font-semibold border border-sunrise-100">
                                                     {lead.category}
                                                 </span>
-                                                <p className="text-xs text-red-400 mt-2">
-                                                    ⚠️ No website detected - Perfect prospect!
+                                                <p className="text-xs font-semibold text-rose-500 mt-2 bg-rose-50 inline-block px-2 py-1 rounded-md">
+                                                    No website detected
                                                 </p>
                                             </div>
                                         </div>
@@ -155,9 +155,9 @@ export default function AILeadChat() {
                 {/* Loading Indicator */}
                 {isLoading && (
                     <div className="flex justify-start">
-                        <div className="bg-white/5 border border-white/10 rounded-2xl p-4 flex items-center gap-3">
-                            <Loader2 className="w-5 h-5 text-cyan-400 animate-spin" />
-                            <span className="text-sm text-gray-300">AI is searching Google Maps...</span>
+                        <div className="bg-white border border-sand-200 rounded-2xl p-4 flex items-center gap-3 shadow-sm">
+                            <Loader2 className="w-5 h-5 text-sunrise-500 animate-spin" />
+                            <span className="text-sm text-sand-600">Searching database...</span>
                         </div>
                     </div>
                 )}
@@ -166,26 +166,26 @@ export default function AILeadChat() {
             </div>
 
             {/* Input Area */}
-            <form onSubmit={handleSubmit} className="p-4 border-t border-white/10">
+            <form onSubmit={handleSubmit} className="p-4 border-t border-sand-200 bg-white">
                 <div className="flex gap-2">
                     <input
                         type="text"
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         placeholder="e.g., Find 4+ star plumbers in Chicago without websites..."
-                        className="flex-1 px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none"
+                        className="flex-1 px-4 py-3 rounded-xl bg-sand-50 border border-sand-200 text-sand-900 placeholder-sand-400 focus:border-sunrise-400 focus:ring-2 focus:ring-sunrise-100 focus:outline-none transition-all"
                         disabled={isLoading}
                     />
                     <button
                         type="submit"
                         disabled={isLoading || !input.trim()}
-                        className="px-6 py-3 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                        className="px-6 py-3 rounded-xl bg-gradient-to-r from-sunrise-500 to-rose-500 text-white font-semibold hover:shadow-lg hover:shadow-sunrise-500/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                     >
                         <Send className="w-4 h-4" />
                     </button>
                 </div>
-                <p className="text-xs text-gray-500 mt-2">
-                    💡 Tip: Be specific! Mention niche, city, ratings, or any special criteria
+                <p className="text-xs text-sand-500 mt-2 pl-2">
+                    Tip: Be specific! Mention niche, city, ratings, or any special criteria
                 </p>
             </form>
         </div>

@@ -67,7 +67,7 @@ export default function Footer() {
     ];
 
     return (
-        <footer className="border-t border-white/10 bg-black/20 backdrop-blur-xl">
+        <footer className="border-t border-sand-200 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-8">
                     {/* Brand Column */}
@@ -76,8 +76,8 @@ export default function Footer() {
                             <Image src="/logo.svg" alt="MarketCompassZ" width={40} height={40} className="w-10 h-10" />
                             <span className="text-xl font-bold gradient-text">MarketCompassZ</span>
                         </div>
-                        <p className="text-gray-400 text-sm mb-6 max-w-xs">
-                            Autonomous AI-powered lead generation for developers. Find businesses without websites instantly.
+                        <p className="text-sand-600 text-sm mb-6 max-w-xs">
+                            Automated lead generation for developers. Find businesses without websites instantly.
                         </p>
                         <div className="flex gap-4">
                             {socialLinks.map((link) => (
@@ -86,7 +86,7 @@ export default function Footer() {
                                     href={link.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-gray-400 hover:text-primary-400 transition-colors"
+                                    className="text-sand-400 hover:text-sunrise-500 transition-colors"
                                     aria-label={link.name}
                                 >
                                     {link.icon}
@@ -98,7 +98,7 @@ export default function Footer() {
                     {/* Link Columns */}
                     {Object.entries(footerLinks).map(([category, links]) => (
                         <div key={category}>
-                            <h3 className="text-white font-semibold mb-4 text-sm">{category}</h3>
+                            <h3 className="text-sand-900 font-semibold mb-4 text-sm">{category}</h3>
                             <ul className="space-y-2">
                                 {links.map((link) => (
                                     <li key={link.name}>
@@ -107,14 +107,14 @@ export default function Footer() {
                                                 href={link.href}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className="text-gray-400 hover:text-primary-400 transition-colors text-sm"
+                                                className="text-sand-600 hover:text-sunrise-600 transition-colors text-sm"
                                             >
                                                 {link.name}
                                             </a>
                                         ) : (
                                             <Link
                                                 href={link.href}
-                                                className="text-gray-400 hover:text-primary-400 transition-colors text-sm"
+                                                className="text-sand-600 hover:text-sunrise-600 transition-colors text-sm"
                                             >
                                                 {link.name}
                                             </Link>
@@ -127,26 +127,26 @@ export default function Footer() {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
-                    <p className="text-gray-500 text-sm">
+                <div className="pt-8 border-t border-sand-200 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p className="text-sand-500 text-sm">
                         © {currentYear} MarketCompassZ by{' '}
                         <a
                             href="https://github.com/aakash4dev"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-accent-400 hover:text-accent-300 transition-colors"
+                            className="text-sunrise-600 hover:text-sunrise-500 transition-colors"
                         >
                             Aakash Singh Rajput
                         </a>
                         . Licensed under MIT.
                     </p>
-                    <p className="text-gray-500 text-sm">
+                    <p className="text-sand-500 text-sm">
                         Built for{' '}
                         <a
                             href="https://www.commudle.com/communities/tensorflow-delhi/events/genai-hackathon-delhi"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-primary-400 hover:text-primary-300 transition-colors"
+                            className="text-sunrise-600 hover:text-sunrise-500 transition-colors"
                         >
                             GenAI Hackathon Delhi
                         </a>

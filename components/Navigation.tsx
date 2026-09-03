@@ -30,29 +30,30 @@ export default function Navigation() {
     const navLinks = [
         { label: 'Home', href: '/' },
         { label: 'Discovery', href: '/discovery' },
+        { label: 'Delhi NCR Leads', href: '/delhi-ncr' },
         { label: 'Toppers', href: '/toppers' },
         { label: 'Blog', href: '/blog' },
     ];
 
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 bg-space-950/80 backdrop-blur-lg border-b border-white/10">
+        <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-lg border-b border-sand-200">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
                     <Link href="/" className="flex items-center gap-3 group">
                         <Logo size={40} className="transform group-hover:scale-110 transition-transform duration-300" />
-                        <span className="text-xl font-black gradient-text hidden sm:block">MarketCompassZ</span>
+                        <span className="text-xl font-black text-sunrise-900 hidden sm:block">MarketCompassZ</span>
                     </Link>
 
                     {/* Desktop Navigation */}
-                    <div className="hidden md:flex items-center gap-8">
+                    <div className="hidden md:flex items-center gap-6">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.href}
                                 href={link.href}
                                 className={`text-sm font-semibold transition-colors ${pathname === link.href
-                                    ? 'text-indigo-400'
-                                    : 'text-gray-300 hover:text-indigo-400'
+                                    ? 'text-sunrise-600'
+                                    : 'text-sand-600 hover:text-sunrise-500'
                                     }`}
                             >
                                 {link.label}
@@ -135,13 +136,13 @@ export default function Navigation() {
 
             {/* Mobile Menu */}
             {mobileMenuOpen && (
-                <div className="md:hidden bg-space-900/95 backdrop-blur-lg border-t border-white/10">
+                <div className="md:hidden bg-white/95 backdrop-blur-lg border-t border-sand-200">
                     <div className="px-4 py-6 space-y-4">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.href}
                                 href={link.href}
-                                className={`block text-base font-semibold ${pathname === link.href ? 'text-indigo-400' : 'text-gray-300'
+                                className={`block text-base font-semibold ${pathname === link.href ? 'text-sunrise-600' : 'text-sand-600 hover:text-sunrise-500'
                                     }`}
                                 onClick={() => setMobileMenuOpen(false)}
                             >
